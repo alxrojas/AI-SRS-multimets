@@ -1,1 +1,18 @@
+What if the following error appears on the Matlab terminal?
 
+Unable to load bundle binary
+/Applications/MATLAB_R2020b.app/bin/maci64/builtins/images_builtins/mwlibmwimagescore_builtinimpl.dylib. Error:
+dlopen(/Applications/MATLAB_R2020b.app/bin/maci64/builtins/images_builtins/mwlibmwimagescore_builtinimpl.dylib, 10):
+Library not loaded: @rpath/libcudart.10.2.dylib
+  Referenced from: /Applications/MATLAB_R2020b.app/bin/maci64/libopencv_core.4.2.0.dylib
+  Reason: no suitable image found.  Did find:
+	/Applications/MATLAB_R2020b.app/bin/maci64/libcudart.10.2.dylib: code signature invalid for
+        '/Applications/MATLAB_R2020b.app/bin/maci64/libcudart.10.2.dylib'
+        
+      
+Answer: 
+For Mac users, on the terminal copy: 
+  >> sudo cp /Applications/MATLAB_R2020b.app/bin/maci64/libcudart.10.2.dylib 
+  >> udo codesign --deep -fs - /usr/local/lib/libcudart.10.2.dylib
+  
+Tested: R2020b on Big Sur (11.6.6), R2019b on Mojave (10.14.6) - note libcudart version is different: libcudart.10.1.dylib
